@@ -1,0 +1,114 @@
+%implements s1_b0_qkune_TLCInterface "C"
+
+%function getInputAddr_1_1_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(0, 0, "")> %% rtb_Step1
+
+%return "&rtb_Step1"
+%endfunction
+
+%function getInput_1_1_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(0, 0, "")> %% rtb_Step1
+
+%return "rtb_Step1"
+%endfunction
+
+%function getInputAddr_1_1_0_1_0_1(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&twin_P.Constant_Value"
+%endfunction
+
+%function getInput_1_1_0_1_0_1(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "twin_P.Constant_Value"
+%endfunction
+
+%function getInputAddr_1_1_0_1_0_2(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&twin_P.Constant_Value"
+%endfunction
+
+%function getInput_1_1_0_1_0_2(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "twin_P.Constant_Value"
+%endfunction
+
+%function getInputAddr_1_1_0_1_0_3(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(41, 0, "")> %% rtb_UnitDelay
+
+%return "&rtb_UnitDelay" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_1_0_1_0_3(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(41, 0, "")> %% rtb_UnitDelay
+
+%return "rtb_UnitDelay" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_1_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(1, 0, "")> %% rtb_MATLABFcn
+
+%return "&rtb_MATLABFcn" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_1_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(1, 0, "")> %% rtb_MATLABFcn
+
+%return "rtb_MATLABFcn" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInputAddr_1_2_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(0, 0, "")> %% rtb_Step1
+
+%return "&rtb_Step1"
+%endfunction
+
+%function getInput_1_2_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(0, 0, "")> %% rtb_Step1
+
+%return "rtb_Step1"
+%endfunction
+
+%function getInputAddr_1_2_0_1_0_1(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&twin_P.Constant_Value"
+%endfunction
+
+%function getInput_1_2_0_1_0_1(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "twin_P.Constant_Value"
+%endfunction
+
+%function getInputAddr_1_2_0_1_0_2(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&twin_P.Constant_Value"
+%endfunction
+
+%function getInput_1_2_0_1_0_2(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "twin_P.Constant_Value"
+%endfunction
+
+%function getInputAddr_1_2_0_1_0_3(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(41, 0, "")> %% rtb_UnitDelay
+
+%return "&rtb_UnitDelay" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_2_0_1_0_3(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(41, 0, "")> %% rtb_UnitDelay
+
+%return "rtb_UnitDelay" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_2_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(2, 0, "")> %% rtb_MATLABFcn_e
+
+%return "&rtb_MATLABFcn_e" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_2_0_1_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+%<SLibCGIRAccessLocalVar(2, 0, "")> %% rtb_MATLABFcn_e
+
+%return "rtb_MATLABFcn_e" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+

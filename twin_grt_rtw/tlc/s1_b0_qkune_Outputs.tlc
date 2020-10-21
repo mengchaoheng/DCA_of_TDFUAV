@@ -1,0 +1,1098 @@
+%implements s1_b0_qkune_Outputs "C"
+
+%function Outputs(block, system) Output
+%<SLibCGIRAccessLocalVar(0, 0, "")> %% rtb_Step1
+%<SLibCGIRAccessLocalVar(41, 0, "")> %% rtb_UnitDelay
+%<SLibCGIRAccessLocalVar(2, 0, "")> %% rtb_MATLABFcn_e
+%<SLibCGIRAccessLocalVar(1, 0, "")> %% rtb_MATLABFcn
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%openfile localVarDecl
+
+int_T cj;
+real_T c[9];
+static const real_T a[27] = { -0.053508817097924072, 0.0, 0.053508817097924058, 0.0, -0.053508817097924058, 0.0, 0.053508817097924058, 0.0, 0.00089768017706767734, 0.0, -0.016707672427180371, 0.0, 0.016707672427180371, 0.0, -0.016707672427180371, 0.0, 0.016707672427180371, 0.0, 0.0065666857550754926, -0.010719384622941738, 0.0065666857550754952, 0.023852756133092731, 0.0065666857550754952, 0.023852756133092734, 0.006566685755075497, -0.010719384622941738, 2.1274990474913687E-20 };
+real_T rtb_Sum2;
+real_T rtb_Sum2_a;
+real_T rtb_Gain;
+real_T rtb_Sum3;
+real_T rtb_Gain_p;
+real_T rtb_Gain1_l;
+real_T rtb_IntegratorSecondOrderLimite[9];
+int32_T i;
+real_T rtb_y_idx_7;
+real_T rtb_y_idx_6;
+real_T rtb_y_idx_5;
+real_T rtb_y_idx_4;
+real_T rtb_y_idx_3;
+real_T rtb_y_idx_2;
+real_T rtb_y_idx_1;
+%closefile localVarDecl
+%assign tlcOutputsFcnOfS1B1 = OpaqueTLCBlockFcn("Outputs", 1, 1, 0, 1)
+%assign tlcOutputsFcnOfS1B2 = OpaqueTLCBlockFcn("Outputs", 1, 2, 0, 1)
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Step: '<Root>/Step1' */
+    if (%<(SLibCG_SE(LibGetTaskTime(1)))> < twin_P.Step1_Time) {
+        rtb_Step1 = twin_P.Step1_Y0;
+    } else {
+        rtb_Step1 = twin_P.Step1_YFinal;
+    }
+    /* End of Step: '<Root>/Step1' */
+
+    /* UnitDelay: '<S5>/Unit Delay' */
+    memcpy(&rtb_UnitDelay[0], &twin_DW.UnitDelay_DSTATE[0], 9U * sizeof(real_T));
+%if !WHITE_SPACE(tlcOutputsFcnOfS1B1)
+    /* MATLABFcn: '<S5>/MATLAB Fcn' incorporates:
+ *  Constant: '<Root>/Constant'
+ */
+%<tlcOutputsFcnOfS1B1>\
+%endif
+    /* UnitDelay: '<S7>/Unit Delay' */
+    memcpy(&rtb_UnitDelay[0], &twin_DW.UnitDelay_DSTATE_b[0], 9U * sizeof(real_T));
+%if !WHITE_SPACE(tlcOutputsFcnOfS1B2)
+    /* MATLABFcn: '<S7>/MATLAB Fcn' incorporates:
+ *  Constant: '<Root>/Constant'
+ */
+%<tlcOutputsFcnOfS1B2>\
+%endif
+    /* UnitDelay: '<S9>/Unit Delay' */
+    rtb_Sum2 = twin_DW.UnitDelay_DSTATE_h;
+    /* Gain: '<S9>/Gain' incorporates:
+ *  Sum: '<S9>/Sum'
+ */
+    rtb_Gain = (rtb_MATLABFcn_e[8] - rtb_Sum2) * twin_P.com_t_wls;
+    /* UnitDelay: '<S13>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE;
+    /* Sum: '<S13>/Sum2' */
+    rtb_Sum3 = rtb_MATLABFcn_e[0] - rtb_Sum2_a;
+    /* Sum: '<S13>/Sum3' incorporates:
+ *  Gain: '<S13>/Gain1'
+ */
+    twin_B.Sum3 = twin_P.com_c * rtb_Sum3 + rtb_Sum2_a;
+}
+/* TransferFcn: '<S13>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator[0] * twin_X.TransferFcn3_CSTATE;
+/* Saturate: '<S13>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1 = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1 = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1 = rtb_Sum2_a;
+}
+/* End of Saturate: '<S13>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S14>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_j;
+    /* Sum: '<S14>/Sum3' incorporates:
+ *  Gain: '<S14>/Gain1'
+ *  Sum: '<S14>/Sum2'
+ */
+    twin_B.Sum3_m = (rtb_MATLABFcn_e[1] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S14>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_o[0] * twin_X.TransferFcn3_CSTATE_l;
+/* Saturate: '<S14>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_f = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_f = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_f = rtb_Sum2_a;
+}
+/* End of Saturate: '<S14>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S15>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_m;
+    /* Sum: '<S15>/Sum3' incorporates:
+ *  Gain: '<S15>/Gain1'
+ *  Sum: '<S15>/Sum2'
+ */
+    twin_B.Sum3_j = (rtb_MATLABFcn_e[2] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S15>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_n[0] * twin_X.TransferFcn3_CSTATE_o;
+/* Saturate: '<S15>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_a = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_a = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_a = rtb_Sum2_a;
+}
+/* End of Saturate: '<S15>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S16>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_o;
+    /* Sum: '<S16>/Sum3' incorporates:
+ *  Gain: '<S16>/Gain1'
+ *  Sum: '<S16>/Sum2'
+ */
+    twin_B.Sum3_h = (rtb_MATLABFcn_e[3] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S16>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_f[0] * twin_X.TransferFcn3_CSTATE_i;
+/* Saturate: '<S16>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_j = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_j = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_j = rtb_Sum2_a;
+}
+/* End of Saturate: '<S16>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S17>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_e;
+    /* Sum: '<S17>/Sum3' incorporates:
+ *  Gain: '<S17>/Gain1'
+ *  Sum: '<S17>/Sum2'
+ */
+    twin_B.Sum3_mf = (rtb_MATLABFcn_e[4] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S17>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_n3[0] * twin_X.TransferFcn3_CSTATE_k;
+/* Saturate: '<S17>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_h = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_h = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_h = rtb_Sum2_a;
+}
+/* End of Saturate: '<S17>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S18>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_g;
+    /* Sum: '<S18>/Sum3' incorporates:
+ *  Gain: '<S18>/Gain1'
+ *  Sum: '<S18>/Sum2'
+ */
+    twin_B.Sum3_jt = (rtb_MATLABFcn_e[5] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S18>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_fv[0] * twin_X.TransferFcn3_CSTATE_p;
+/* Saturate: '<S18>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_ju = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_ju = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_ju = rtb_Sum2_a;
+}
+/* End of Saturate: '<S18>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S19>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_oy;
+    /* Sum: '<S19>/Sum3' incorporates:
+ *  Gain: '<S19>/Gain1'
+ *  Sum: '<S19>/Sum2'
+ */
+    twin_B.Sum3_i = (rtb_MATLABFcn_e[6] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S19>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_e[0] * twin_X.TransferFcn3_CSTATE_a;
+/* Saturate: '<S19>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_jk = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_jk = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_jk = rtb_Sum2_a;
+}
+/* End of Saturate: '<S19>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S20>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_d;
+    /* Sum: '<S20>/Sum3' incorporates:
+ *  Gain: '<S20>/Gain1'
+ *  Sum: '<S20>/Sum2'
+ */
+    twin_B.Sum3_hs = (rtb_MATLABFcn_e[7] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S20>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_c[0] * twin_X.TransferFcn3_CSTATE_ol;
+/* Saturate: '<S20>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_c = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_c = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_c = rtb_Sum2_a;
+}
+/* End of Saturate: '<S20>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Sum: '<S9>/Sum1' */
+    twin_B.Sum1 = rtb_Gain + rtb_Sum2;
+}
+/* TransferFcn: '<S9>/Transfer Fcn10' */
+rtb_Sum2_a = twin_P.a_t / twin_P.TransferFcn10_Denominator[0] * twin_X.TransferFcn10_CSTATE;
+/* Saturate: '<S9>/inv' */
+if (rtb_Sum2_a > twin_P.p_limits[1]) {
+    twin_B.inv = twin_P.p_limits[1];
+} else if (rtb_Sum2_a < -twin_P.p_limits[1]) {
+    twin_B.inv = -twin_P.p_limits[1];
+} else {
+    twin_B.inv = rtb_Sum2_a;
+}
+/* End of Saturate: '<S9>/inv' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* MATLAB Function: '<Root>/inv' incorporates:
+ *  Constant: '<Root>/Constant'
+ *  SignalConversion: '<S12>/TmpSignal ConversionAt SFunction Inport1'
+ */
+    for (i = 0; i < 9; i++) {
+        c[i] = a[i + 18] * twin_P.Constant_Value + (a[i + 9] * twin_P.Constant_Value + a[i] * rtb_Step1);
+    }
+    rtb_y_idx_1 = c[1];
+    rtb_y_idx_2 = c[2];
+    rtb_y_idx_3 = c[3];
+    rtb_y_idx_4 = c[4];
+    rtb_y_idx_5 = c[5];
+    rtb_y_idx_6 = c[6];
+    rtb_y_idx_7 = c[7];
+    /* UnitDelay: '<S10>/Unit Delay' */
+    rtb_Sum3 = twin_DW.UnitDelay_DSTATE_p;
+    /* Gain: '<S10>/Gain' incorporates:
+ *  MATLAB Function: '<Root>/inv'
+ *  Sum: '<S10>/Sum'
+ */
+    rtb_Gain_p = (c[8] - rtb_Sum3) * twin_P.com_t_inv;
+    /* UnitDelay: '<S21>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_h;
+    /* Sum: '<S21>/Sum3' incorporates:
+ *  Gain: '<S21>/Gain1'
+ *  MATLAB Function: '<Root>/inv'
+ *  Sum: '<S21>/Sum2'
+ */
+    twin_B.Sum3_k = (c[0] - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S21>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_k[0] * twin_X.TransferFcn3_CSTATE_c;
+/* Saturate: '<S21>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_g = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_g = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_g = rtb_Sum2_a;
+}
+/* End of Saturate: '<S21>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S22>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_c;
+    /* Sum: '<S22>/Sum3' incorporates:
+ *  Gain: '<S22>/Gain1'
+ *  Sum: '<S22>/Sum2'
+ */
+    twin_B.Sum3_d = (rtb_y_idx_1 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S22>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_m[0] * twin_X.TransferFcn3_CSTATE_oe;
+/* Saturate: '<S22>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_e = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_e = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_e = rtb_Sum2_a;
+}
+/* End of Saturate: '<S22>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S23>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_l;
+    /* Sum: '<S23>/Sum3' incorporates:
+ *  Gain: '<S23>/Gain1'
+ *  Sum: '<S23>/Sum2'
+ */
+    twin_B.Sum3_p = (rtb_y_idx_2 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S23>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_a[0] * twin_X.TransferFcn3_CSTATE_d;
+/* Saturate: '<S23>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_l = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_l = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_l = rtb_Sum2_a;
+}
+/* End of Saturate: '<S23>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S24>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_e5;
+    /* Sum: '<S24>/Sum3' incorporates:
+ *  Gain: '<S24>/Gain1'
+ *  Sum: '<S24>/Sum2'
+ */
+    twin_B.Sum3_mv = (rtb_y_idx_3 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S24>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_j[0] * twin_X.TransferFcn3_CSTATE_dh;
+/* Saturate: '<S24>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_fk = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_fk = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_fk = rtb_Sum2_a;
+}
+/* End of Saturate: '<S24>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S25>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_i;
+    /* Sum: '<S25>/Sum3' incorporates:
+ *  Gain: '<S25>/Gain1'
+ *  Sum: '<S25>/Sum2'
+ */
+    twin_B.Sum3_il = (rtb_y_idx_4 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S25>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_k3[0] * twin_X.TransferFcn3_CSTATE_n;
+/* Saturate: '<S25>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_k = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_k = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_k = rtb_Sum2_a;
+}
+/* End of Saturate: '<S25>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S26>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_n;
+    /* Sum: '<S26>/Sum3' incorporates:
+ *  Gain: '<S26>/Gain1'
+ *  Sum: '<S26>/Sum2'
+ */
+    twin_B.Sum3_f = (rtb_y_idx_5 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S26>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_p[0] * twin_X.TransferFcn3_CSTATE_c4;
+/* Saturate: '<S26>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_ld = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_ld = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_ld = rtb_Sum2_a;
+}
+/* End of Saturate: '<S26>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S27>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_ir;
+    /* Sum: '<S27>/Sum3' incorporates:
+ *  Gain: '<S27>/Gain1'
+ *  Sum: '<S27>/Sum2'
+ */
+    twin_B.Sum3_a = (rtb_y_idx_6 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S27>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_ja[0] * twin_X.TransferFcn3_CSTATE_aq;
+/* Saturate: '<S27>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_hk = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_hk = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_hk = rtb_Sum2_a;
+}
+/* End of Saturate: '<S27>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S28>/Unit Delay1' */
+    rtb_Sum2_a = twin_DW.UnitDelay1_DSTATE_if;
+    /* Sum: '<S28>/Sum3' incorporates:
+ *  Gain: '<S28>/Gain1'
+ *  Sum: '<S28>/Sum2'
+ */
+    twin_B.Sum3_as = (rtb_y_idx_7 - rtb_Sum2_a) * twin_P.com_c + rtb_Sum2_a;
+}
+/* TransferFcn: '<S28>/Transfer Fcn3' */
+rtb_Sum2_a = twin_P.a_c / twin_P.TransferFcn3_Denominator_ji[0] * twin_X.TransferFcn3_CSTATE_m;
+/* Saturate: '<S28>/inv1' */
+if (rtb_Sum2_a > twin_P.p_limits[0]) {
+    twin_B.inv1_p = twin_P.p_limits[0];
+} else if (rtb_Sum2_a < -twin_P.p_limits[0]) {
+    twin_B.inv1_p = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_p = rtb_Sum2_a;
+}
+/* End of Saturate: '<S28>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Sum: '<S10>/Sum1' */
+    twin_B.Sum1_e = rtb_Gain_p + rtb_Sum3;
+}
+/* TransferFcn: '<S10>/Transfer Fcn10' */
+rtb_Sum2_a = twin_P.a_t / twin_P.TransferFcn10_Denominator_h[0] * twin_X.TransferFcn10_CSTATE_l;
+/* Saturate: '<S10>/inv' */
+if (rtb_Sum2_a > twin_P.p_limits[1]) {
+    twin_B.inv_p = twin_P.p_limits[1];
+} else if (rtb_Sum2_a < -twin_P.p_limits[1]) {
+    twin_B.inv_p = -twin_P.p_limits[1];
+} else {
+    twin_B.inv_p = rtb_Sum2_a;
+}
+/* End of Saturate: '<S10>/inv' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S11>/Unit Delay' */
+    rtb_Sum3 = twin_DW.UnitDelay_DSTATE_o;
+    /* Sum: '<S11>/Sum1' incorporates:
+ *  Gain: '<S11>/Gain'
+ *  Sum: '<S11>/Sum'
+ */
+    twin_B.Sum1_eo = (rtb_MATLABFcn[8] - rtb_Sum3) * twin_P.com_t_dca + rtb_Sum3;
+    /* UnitDelay: '<S30>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_cc;
+    /* Sum: '<S30>/Sum3' incorporates:
+ *  Gain: '<S30>/Gain1'
+ *  Sum: '<S30>/Sum2'
+ */
+    twin_B.Sum3_f3 = (rtb_MATLABFcn[0] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S11>/Transfer Fcn10' */
+rtb_Sum2_a = twin_P.a_t / twin_P.TransferFcn10_Denominator_b[0] * twin_X.TransferFcn10_CSTATE_j;
+/* TransferFcn: '<S30>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_pe[0] * twin_X.TransferFcn3_CSTATE_b;
+/* Saturate: '<S30>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_m = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_m = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_m = rtb_Gain_p;
+}
+/* End of Saturate: '<S30>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S31>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_a;
+    /* Sum: '<S31>/Sum3' incorporates:
+ *  Gain: '<S31>/Gain1'
+ *  Sum: '<S31>/Sum2'
+ */
+    twin_B.Sum3_f0 = (rtb_MATLABFcn[1] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S31>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_b[0] * twin_X.TransferFcn3_CSTATE_bl;
+/* Saturate: '<S31>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_pv = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_pv = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_pv = rtb_Gain_p;
+}
+/* End of Saturate: '<S31>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S32>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_jp;
+    /* Sum: '<S32>/Sum3' incorporates:
+ *  Gain: '<S32>/Gain1'
+ *  Sum: '<S32>/Sum2'
+ */
+    twin_B.Sum3_kf = (rtb_MATLABFcn[2] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S32>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_mv[0] * twin_X.TransferFcn3_CSTATE_bj;
+/* Saturate: '<S32>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_o = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_o = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_o = rtb_Gain_p;
+}
+/* End of Saturate: '<S32>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S33>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_f;
+    /* Sum: '<S33>/Sum3' incorporates:
+ *  Gain: '<S33>/Gain1'
+ *  Sum: '<S33>/Sum2'
+ */
+    twin_B.Sum3_e = (rtb_MATLABFcn[3] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S33>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_i[0] * twin_X.TransferFcn3_CSTATE_ka;
+/* Saturate: '<S33>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_n = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_n = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_n = rtb_Gain_p;
+}
+/* End of Saturate: '<S33>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S34>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_g3;
+    /* Sum: '<S34>/Sum3' incorporates:
+ *  Gain: '<S34>/Gain1'
+ *  Sum: '<S34>/Sum2'
+ */
+    twin_B.Sum3_n = (rtb_MATLABFcn[4] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S34>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_a3[0] * twin_X.TransferFcn3_CSTATE_mc;
+/* Saturate: '<S34>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_m4 = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_m4 = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_m4 = rtb_Gain_p;
+}
+/* End of Saturate: '<S34>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S35>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_le;
+    /* Sum: '<S35>/Sum3' incorporates:
+ *  Gain: '<S35>/Gain1'
+ *  Sum: '<S35>/Sum2'
+ */
+    twin_B.Sum3_at = (rtb_MATLABFcn[5] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S35>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_h[0] * twin_X.TransferFcn3_CSTATE_ca;
+/* Saturate: '<S35>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_nc = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_nc = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_nc = rtb_Gain_p;
+}
+/* End of Saturate: '<S35>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S36>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_p;
+    /* Sum: '<S36>/Sum3' incorporates:
+ *  Gain: '<S36>/Gain1'
+ *  Sum: '<S36>/Sum2'
+ */
+    twin_B.Sum3_b = (rtb_MATLABFcn[6] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S36>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_hk[0] * twin_X.TransferFcn3_CSTATE_h;
+/* Saturate: '<S36>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_n3 = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_n3 = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_n3 = rtb_Gain_p;
+}
+/* End of Saturate: '<S36>/inv1' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S37>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_ih;
+    /* Sum: '<S37>/Sum3' incorporates:
+ *  Gain: '<S37>/Gain1'
+ *  Sum: '<S37>/Sum2'
+ */
+    twin_B.Sum3_ag = (rtb_MATLABFcn[7] - rtb_Sum3) * twin_P.com_c + rtb_Sum3;
+}
+/* TransferFcn: '<S37>/Transfer Fcn3' */
+rtb_Gain_p = twin_P.a_c / twin_P.TransferFcn3_Denominator_bv[0] * twin_X.TransferFcn3_CSTATE_dv;
+/* Saturate: '<S37>/inv1' */
+if (rtb_Gain_p > twin_P.p_limits[0]) {
+    twin_B.inv1_pr = twin_P.p_limits[0];
+} else if (rtb_Gain_p < -twin_P.p_limits[0]) {
+    twin_B.inv1_pr = -twin_P.p_limits[0];
+} else {
+    twin_B.inv1_pr = rtb_Gain_p;
+}
+/* End of Saturate: '<S37>/inv1' */
+
+/* Saturate: '<S11>/inv' */
+if (rtb_Sum2_a > twin_P.p_limits[1]) {
+    twin_B.inv_i = twin_P.p_limits[1];
+} else if (rtb_Sum2_a < -twin_P.p_limits[1]) {
+    twin_B.inv_i = -twin_P.p_limits[1];
+} else {
+    twin_B.inv_i = rtb_Sum2_a;
+}
+/* End of Saturate: '<S11>/inv' */
+
+/* SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+if (%<(LibIsMajorTimeStep())>) {
+    switch (twin_DW.IntegratorSecondOrderLimited_MO) {
+      case 0:
+        rtb_Sum2_a = -twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+        if (twin_X.IntegratorSecondOrderLimited_CS[0] <= rtb_Sum2_a) {
+            twin_X.IntegratorSecondOrderLimited_CS[0] = rtb_Sum2_a;
+            if (twin_X.IntegratorSecondOrderLimited_CS[1] > 0.0) {
+                twin_DW.IntegratorSecondOrderLimited_MO = 0;
+            } else {
+                twin_X.IntegratorSecondOrderLimited_CS[1] = 0.0;
+                twin_DW.IntegratorSecondOrderLimited_MO = 1;
+            }
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        rtb_Sum2_a = twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+        if (twin_X.IntegratorSecondOrderLimited_CS[0] >= rtb_Sum2_a) {
+            twin_X.IntegratorSecondOrderLimited_CS[0] = rtb_Sum2_a;
+            if (twin_X.IntegratorSecondOrderLimited_CS[1] < 0.0) {
+                twin_DW.IntegratorSecondOrderLimited_MO = 0;
+            } else {
+                twin_X.IntegratorSecondOrderLimited_CS[1] = 0.0;
+                twin_DW.IntegratorSecondOrderLimited_MO = 2;
+            }
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        if (twin_X.IntegratorSecondOrderLimited_CS[1] <= -twin_P.v_limits[1]) {
+            twin_X.IntegratorSecondOrderLimited_CS[1] = -twin_P.v_limits[1];
+            twin_DW.IntegratorSecondOrderLimited_MO = 3;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        if (twin_X.IntegratorSecondOrderLimited_CS[1] >= twin_P.v_limits[1]) {
+            twin_X.IntegratorSecondOrderLimited_CS[1] = twin_P.v_limits[1];
+            twin_DW.IntegratorSecondOrderLimited_MO = 4;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        break;
+      case 1:
+        if (twin_X.IntegratorSecondOrderLimited_CS[0] > -twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+            if (twin_X.IntegratorSecondOrderLimited_CS[0] >= twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+                twin_DW.IntegratorSecondOrderLimited_MO = 2;
+                twin_X.IntegratorSecondOrderLimited_CS[0] = twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+            } else {
+                twin_DW.IntegratorSecondOrderLimited_MO = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited_CS[0] = -twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited_CS[1] = 0.0;
+        }
+        break;
+      case 2:
+        if (twin_X.IntegratorSecondOrderLimited_CS[0] < twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+            if (twin_X.IntegratorSecondOrderLimited_CS[0] <= -twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+                twin_DW.IntegratorSecondOrderLimited_MO = 1;
+                twin_X.IntegratorSecondOrderLimited_CS[0] = -twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+            } else {
+                twin_DW.IntegratorSecondOrderLimited_MO = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited_CS[0] = twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited_CS[1] = 0.0;
+        }
+        break;
+      case 3:
+        if (twin_X.IntegratorSecondOrderLimited_CS[1] > -twin_P.v_limits[1]) {
+            if (twin_X.IntegratorSecondOrderLimited_CS[1] >= twin_P.v_limits[1]) {
+                twin_DW.IntegratorSecondOrderLimited_MO = 4;
+                twin_X.IntegratorSecondOrderLimited_CS[1] = twin_P.v_limits[1];
+            } else {
+                twin_DW.IntegratorSecondOrderLimited_MO = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited_CS[1] = -twin_P.v_limits[1];
+        }
+        if (twin_X.IntegratorSecondOrderLimited_CS[0] <= -twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+            twin_X.IntegratorSecondOrderLimited_CS[0] = -twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited_CS[1] = 0.0;
+            twin_DW.IntegratorSecondOrderLimited_MO = 1;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        break;
+      case 4:
+        if (twin_X.IntegratorSecondOrderLimited_CS[1] < twin_P.v_limits[1]) {
+            if (twin_X.IntegratorSecondOrderLimited_CS[1] <= -twin_P.v_limits[1]) {
+                twin_DW.IntegratorSecondOrderLimited_MO = 3;
+                twin_X.IntegratorSecondOrderLimited_CS[1] = -twin_P.v_limits[1];
+            } else {
+                twin_DW.IntegratorSecondOrderLimited_MO = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited_CS[1] = twin_P.v_limits[1];
+        }
+        if (twin_X.IntegratorSecondOrderLimited_CS[0] >= twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+            twin_X.IntegratorSecondOrderLimited_CS[0] = twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited_CS[1] = 0.0;
+            twin_DW.IntegratorSecondOrderLimited_MO = 2;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        break;
+    }
+}
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Saturate: '<S29>/Demand limits' */
+    rtb_Sum2 = -twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+    rtb_Gain = twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+    if (0.0 > rtb_Gain) {
+        twin_B.Demandlimits = rtb_Gain;
+    } else if (0.0 < rtb_Sum2) {
+        twin_B.Demandlimits = rtb_Sum2;
+    } else {
+        twin_B.Demandlimits = 0.0;
+    }
+    /* End of Saturate: '<S29>/Demand limits' */
+}
+/* SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+if (twin_X.IntegratorSecondOrderLimited_CS[0] < -twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+    rtb_Sum2_a = -twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+} else if (twin_X.IntegratorSecondOrderLimited_CS[0] > twin_P.p_limits[1] * 3.1415926535897931 / 180.0) {
+    rtb_Sum2_a = twin_P.p_limits[1] * 3.1415926535897931 / 180.0;
+} else {
+    rtb_Sum2_a = twin_X.IntegratorSecondOrderLimited_CS[0];
+}
+/* Sum: '<S29>/Sum3' */
+rtb_Gain_p = twin_B.Demandlimits - rtb_Sum2_a;
+/* Saturate: '<S29>/rate limit*2*zeta//wn' */
+rtb_Sum2 = -twin_P.v_limits[1] * 2.0 * twin_P.NonlinearSecondOrderActuator2_z / twin_P.NonlinearSecondOrderActuator2_w;
+rtb_Gain = twin_P.v_limits[1] * 2.0 * twin_P.NonlinearSecondOrderActuator2_z / twin_P.NonlinearSecondOrderActuator2_w;
+if (rtb_Gain_p > rtb_Gain) {
+    rtb_Gain_p = rtb_Gain;
+} else {
+    if (rtb_Gain_p < rtb_Sum2) {
+        rtb_Gain_p = rtb_Sum2;
+    }
+}
+/* End of Saturate: '<S29>/rate limit*2*zeta//wn' */
+
+/* SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+if (twin_X.IntegratorSecondOrderLimited_CS[1] < -twin_P.v_limits[1]) {
+    rtb_Sum2_a = -twin_P.v_limits[1];
+} else if (twin_X.IntegratorSecondOrderLimited_CS[1] > twin_P.v_limits[1]) {
+    rtb_Sum2_a = twin_P.v_limits[1];
+} else {
+    rtb_Sum2_a = twin_X.IntegratorSecondOrderLimited_CS[1];
+}
+/* Sum: '<S29>/Sum2' incorporates:
+ *  Gain: '<S29>/2*zeta * wn'
+ *  Gain: '<S29>/wn^2'
+ */
+twin_B.Sum2 = twin_P.NonlinearSecondOrderActuator2_w * twin_P.NonlinearSecondOrderActuator2_w * rtb_Gain_p - 2.0 * twin_P.NonlinearSecondOrderActuator2_z * twin_P.NonlinearSecondOrderActuator2_w * rtb_Sum2_a;
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* UnitDelay: '<S38>/Unit Delay1' */
+    rtb_Sum3 = twin_DW.UnitDelay1_DSTATE_j5;
+    /* Gain: '<S38>/Gain1' incorporates:
+ *  Sum: '<S38>/Sum2'
+ */
+    rtb_Gain1_l = (0.0 - rtb_Sum3) * twin_P.com_c;
+}
+/* SecondOrderIntegrator: '<S39>/Integrator, Second-Order Limited' */
+if (%<(LibIsMajorTimeStep())>) {
+    switch (twin_DW.IntegratorSecondOrderLimited__f) {
+      case 0:
+        rtb_Sum2_a = -twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+        if (twin_X.IntegratorSecondOrderLimited__d[0] <= rtb_Sum2_a) {
+            twin_X.IntegratorSecondOrderLimited__d[0] = rtb_Sum2_a;
+            if (twin_X.IntegratorSecondOrderLimited__d[1] > 0.0) {
+                twin_DW.IntegratorSecondOrderLimited__f = 0;
+            } else {
+                twin_X.IntegratorSecondOrderLimited__d[1] = 0.0;
+                twin_DW.IntegratorSecondOrderLimited__f = 1;
+            }
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        rtb_Sum2_a = twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+        if (twin_X.IntegratorSecondOrderLimited__d[0] >= rtb_Sum2_a) {
+            twin_X.IntegratorSecondOrderLimited__d[0] = rtb_Sum2_a;
+            if (twin_X.IntegratorSecondOrderLimited__d[1] < 0.0) {
+                twin_DW.IntegratorSecondOrderLimited__f = 0;
+            } else {
+                twin_X.IntegratorSecondOrderLimited__d[1] = 0.0;
+                twin_DW.IntegratorSecondOrderLimited__f = 2;
+            }
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        rtb_Sum2_a = twin_P.v_limits[0] * 3.1415926535897931 / 180.0;
+        if (twin_X.IntegratorSecondOrderLimited__d[1] <= -rtb_Sum2_a) {
+            twin_X.IntegratorSecondOrderLimited__d[1] = -rtb_Sum2_a;
+            twin_DW.IntegratorSecondOrderLimited__f = 3;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        if (twin_X.IntegratorSecondOrderLimited__d[1] >= twin_P.v_limits[0] * 3.1415926535897931 / 180.0) {
+            twin_X.IntegratorSecondOrderLimited__d[1] = twin_P.v_limits[0] * 3.1415926535897931 / 180.0;
+            twin_DW.IntegratorSecondOrderLimited__f = 4;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        break;
+      case 1:
+        if (twin_X.IntegratorSecondOrderLimited__d[0] > -twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+            if (twin_X.IntegratorSecondOrderLimited__d[0] >= twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+                twin_DW.IntegratorSecondOrderLimited__f = 2;
+                twin_X.IntegratorSecondOrderLimited__d[0] = twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+            } else {
+                twin_DW.IntegratorSecondOrderLimited__f = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited__d[0] = -twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited__d[1] = 0.0;
+        }
+        break;
+      case 2:
+        if (twin_X.IntegratorSecondOrderLimited__d[0] < twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+            if (twin_X.IntegratorSecondOrderLimited__d[0] <= -twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+                twin_DW.IntegratorSecondOrderLimited__f = 1;
+                twin_X.IntegratorSecondOrderLimited__d[0] = -twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+            } else {
+                twin_DW.IntegratorSecondOrderLimited__f = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited__d[0] = twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited__d[1] = 0.0;
+        }
+        break;
+      case 3:
+        if (twin_X.IntegratorSecondOrderLimited__d[1] > -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0)) {
+            if (twin_X.IntegratorSecondOrderLimited__d[1] >= twin_P.v_limits[0] * 3.1415926535897931 / 180.0) {
+                twin_DW.IntegratorSecondOrderLimited__f = 4;
+                twin_X.IntegratorSecondOrderLimited__d[1] = twin_P.v_limits[0] * 3.1415926535897931 / 180.0;
+            } else {
+                twin_DW.IntegratorSecondOrderLimited__f = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited__d[1] = -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0);
+        }
+        if (twin_X.IntegratorSecondOrderLimited__d[0] <= -twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+            twin_X.IntegratorSecondOrderLimited__d[0] = -twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited__d[1] = 0.0;
+            twin_DW.IntegratorSecondOrderLimited__f = 1;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        break;
+      case 4:
+        if (twin_X.IntegratorSecondOrderLimited__d[1] < twin_P.v_limits[0] * 3.1415926535897931 / 180.0) {
+            if (twin_X.IntegratorSecondOrderLimited__d[1] <= -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0)) {
+                twin_DW.IntegratorSecondOrderLimited__f = 3;
+                twin_X.IntegratorSecondOrderLimited__d[1] = -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0);
+            } else {
+                twin_DW.IntegratorSecondOrderLimited__f = 0;
+            }
+        } else {
+            twin_X.IntegratorSecondOrderLimited__d[1] = twin_P.v_limits[0] * 3.1415926535897931 / 180.0;
+        }
+        if (twin_X.IntegratorSecondOrderLimited__d[0] >= twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+            twin_X.IntegratorSecondOrderLimited__d[0] = twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+            twin_X.IntegratorSecondOrderLimited__d[1] = 0.0;
+            twin_DW.IntegratorSecondOrderLimited__f = 2;
+            %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+        }
+        break;
+    }
+}
+if (twin_X.IntegratorSecondOrderLimited__d[0] < -twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+    twin_B.IntegratorSecondOrderLimited_o1 = -twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+} else if (twin_X.IntegratorSecondOrderLimited__d[0] > twin_P.p_limits[0] * 3.1415926535897931 / 180.0) {
+    twin_B.IntegratorSecondOrderLimited_o1 = twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+} else {
+    twin_B.IntegratorSecondOrderLimited_o1 = twin_X.IntegratorSecondOrderLimited__d[0];
+}
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Sum: '<S38>/Sum3' */
+    rtb_Sum3 += rtb_Gain1_l;
+    /* Saturate: '<S39>/Demand limits' */
+    rtb_Sum2 = -twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+    rtb_Gain = twin_P.p_limits[0] * 3.1415926535897931 / 180.0;
+    if (rtb_Sum3 > rtb_Gain) {
+        twin_B.Demandlimits_g = rtb_Gain;
+    } else if (rtb_Sum3 < rtb_Sum2) {
+        twin_B.Demandlimits_g = rtb_Sum2;
+    } else {
+        twin_B.Demandlimits_g = rtb_Sum3;
+    }
+    /* End of Saturate: '<S39>/Demand limits' */
+}
+/* Sum: '<S39>/Sum3' */
+rtb_Sum3 = twin_B.Demandlimits_g - twin_B.IntegratorSecondOrderLimited_o1;
+/* Saturate: '<S39>/rate limit*2*zeta//wn' */
+rtb_Sum2 = -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0) * 2.0 * twin_P.NonlinearSecondOrderActuator2_m / twin_P.NonlinearSecondOrderActuator2_d;
+rtb_Gain = twin_P.v_limits[0] * 3.1415926535897931 / 180.0 * 2.0 * twin_P.NonlinearSecondOrderActuator2_m / twin_P.NonlinearSecondOrderActuator2_d;
+if (rtb_Sum3 > rtb_Gain) {
+    rtb_Sum3 = rtb_Gain;
+} else {
+    if (rtb_Sum3 < rtb_Sum2) {
+        rtb_Sum3 = rtb_Sum2;
+    }
+}
+/* End of Saturate: '<S39>/rate limit*2*zeta//wn' */
+
+/* SecondOrderIntegrator: '<S39>/Integrator, Second-Order Limited' */
+if (twin_X.IntegratorSecondOrderLimited__d[1] < -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0)) {
+    rtb_Sum2_a = -(twin_P.v_limits[0] * 3.1415926535897931 / 180.0);
+} else if (twin_X.IntegratorSecondOrderLimited__d[1] > twin_P.v_limits[0] * 3.1415926535897931 / 180.0) {
+    rtb_Sum2_a = twin_P.v_limits[0] * 3.1415926535897931 / 180.0;
+} else {
+    rtb_Sum2_a = twin_X.IntegratorSecondOrderLimited__d[1];
+}
+/* Sum: '<S39>/Sum2' incorporates:
+ *  Gain: '<S39>/2*zeta * wn'
+ *  Gain: '<S39>/wn^2'
+ */
+twin_B.Sum2_o = twin_P.NonlinearSecondOrderActuator2_d * twin_P.NonlinearSecondOrderActuator2_d * rtb_Sum3 - 2.0 * twin_P.NonlinearSecondOrderActuator2_m * twin_P.NonlinearSecondOrderActuator2_d * rtb_Sum2_a;
+/* SecondOrderIntegrator: '<S6>/Integrator, Second-Order Limited' */
+if (%<(LibIsMajorTimeStep())>) {
+    i = 9;
+    for (cj = 0; cj < 9; cj++) {
+        switch (twin_DW.IntegratorSecondOrderLimited__g[cj]) {
+          case 0:
+            if (twin_X.IntegratorSecondOrderLimited__j[cj] <= twin_P.umin[cj]) {
+                twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umin[cj];
+                if (twin_X.IntegratorSecondOrderLimited__j[i] > 0.0) {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 0;
+                } else {
+                    twin_X.IntegratorSecondOrderLimited__j[i] = 0.0;
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 1;
+                }
+                %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+            }
+            if (twin_X.IntegratorSecondOrderLimited__j[cj] >= twin_P.umax[cj]) {
+                twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umax[cj];
+                if (twin_X.IntegratorSecondOrderLimited__j[i] < 0.0) {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 0;
+                } else {
+                    twin_X.IntegratorSecondOrderLimited__j[i] = 0.0;
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 2;
+                }
+                %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+            }
+            if (twin_X.IntegratorSecondOrderLimited__j[i] <= -twin_P.vmax[cj]) {
+                twin_X.IntegratorSecondOrderLimited__j[i] = -twin_P.vmax[cj];
+                twin_DW.IntegratorSecondOrderLimited__g[cj] = 3;
+                %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+            }
+            if (twin_X.IntegratorSecondOrderLimited__j[i] >= twin_P.vmax[cj]) {
+                twin_X.IntegratorSecondOrderLimited__j[i] = twin_P.vmax[cj];
+                twin_DW.IntegratorSecondOrderLimited__g[cj] = 4;
+                %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+            }
+            break;
+          case 1:
+            if (twin_X.IntegratorSecondOrderLimited__j[cj] > twin_P.umin[cj]) {
+                if (twin_X.IntegratorSecondOrderLimited__j[cj] >= twin_P.umax[cj]) {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 2;
+                    twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umax[cj];
+                } else {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 0;
+                }
+            } else {
+                twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umin[cj];
+                twin_X.IntegratorSecondOrderLimited__j[i] = 0.0;
+            }
+            break;
+          case 2:
+            if (twin_X.IntegratorSecondOrderLimited__j[cj] < twin_P.umax[cj]) {
+                if (twin_X.IntegratorSecondOrderLimited__j[cj] <= twin_P.umin[cj]) {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 1;
+                    twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umin[cj];
+                } else {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 0;
+                }
+            } else {
+                twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umax[cj];
+                twin_X.IntegratorSecondOrderLimited__j[i] = 0.0;
+            }
+            break;
+          case 3:
+            if (twin_X.IntegratorSecondOrderLimited__j[i] > -twin_P.vmax[cj]) {
+                if (twin_X.IntegratorSecondOrderLimited__j[i] >= twin_P.vmax[cj]) {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 4;
+                    twin_X.IntegratorSecondOrderLimited__j[i] = twin_P.vmax[cj];
+                } else {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 0;
+                }
+            } else {
+                twin_X.IntegratorSecondOrderLimited__j[i] = -twin_P.vmax[cj];
+            }
+            if (twin_X.IntegratorSecondOrderLimited__j[cj] <= twin_P.umin[cj]) {
+                twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umin[cj];
+                twin_X.IntegratorSecondOrderLimited__j[i] = 0.0;
+                twin_DW.IntegratorSecondOrderLimited__g[cj] = 1;
+                %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+            }
+            break;
+          case 4:
+            if (twin_X.IntegratorSecondOrderLimited__j[i] < twin_P.vmax[cj]) {
+                if (twin_X.IntegratorSecondOrderLimited__j[i] <= -twin_P.vmax[cj]) {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 3;
+                    twin_X.IntegratorSecondOrderLimited__j[i] = -twin_P.vmax[cj];
+                } else {
+                    twin_DW.IntegratorSecondOrderLimited__g[cj] = 0;
+                }
+            } else {
+                twin_X.IntegratorSecondOrderLimited__j[i] = twin_P.vmax[cj];
+            }
+            if (twin_X.IntegratorSecondOrderLimited__j[cj] >= twin_P.umax[cj]) {
+                twin_X.IntegratorSecondOrderLimited__j[cj] = twin_P.umax[cj];
+                twin_X.IntegratorSecondOrderLimited__j[i] = 0.0;
+                twin_DW.IntegratorSecondOrderLimited__g[cj] = 2;
+                %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+            }
+            break;
+        }
+        i++;
+    }
+}
+i = 9;
+for (cj = 0; cj < 9; cj++) {
+    if (twin_X.IntegratorSecondOrderLimited__j[cj] < twin_P.umin[cj]) {
+        c[cj] = twin_P.umin[cj];
+    } else if (twin_X.IntegratorSecondOrderLimited__j[cj] > twin_P.umax[cj]) {
+        c[cj] = twin_P.umax[cj];
+    } else {
+        c[cj] = twin_X.IntegratorSecondOrderLimited__j[cj];
+    }
+    if (twin_X.IntegratorSecondOrderLimited__j[i] < -twin_P.vmax[cj]) {
+        rtb_IntegratorSecondOrderLimite[cj] = -twin_P.vmax[cj];
+    } else if (twin_X.IntegratorSecondOrderLimited__j[i] > twin_P.vmax[cj]) {
+        rtb_IntegratorSecondOrderLimite[cj] = twin_P.vmax[cj];
+    } else {
+        rtb_IntegratorSecondOrderLimite[cj] = twin_X.IntegratorSecondOrderLimited__j[i];
+    }
+    i++;
+}
+/* End of SecondOrderIntegrator: '<S6>/Integrator, Second-Order Limited' */
+
+/* Gain: '<S6>/2*zeta * wn' */
+rtb_Sum2_a = 2.0 * twin_P.NonlinearSecondOrderActuator2_j * twin_P.NonlinearSecondOrderActuator_ko;
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Saturate: '<S6>/Demand limits' */
+    for (i = 0; i < 9; i++) {
+        if (0.0 > twin_P.umax[i]) {
+            twin_B.Demandlimits_m[i] = twin_P.umax[i];
+        } else if (0.0 < twin_P.umin[i]) {
+            twin_B.Demandlimits_m[i] = twin_P.umin[i];
+        } else {
+            twin_B.Demandlimits_m[i] = 0.0;
+        }
+    }
+    /* End of Saturate: '<S6>/Demand limits' */
+}
+/* Gain: '<S6>/wn^2' */
+rtb_Gain_p = twin_P.NonlinearSecondOrderActuator_ko * twin_P.NonlinearSecondOrderActuator_ko;
+for (i = 0; i < 9; i++) {
+    /* Sum: '<S6>/Sum3' */
+    rtb_Sum3 = twin_B.Demandlimits_m[i] - c[i];
+    /* Saturate: '<S6>/rate limit*2*zeta//wn' */
+    rtb_Sum2 = -twin_P.vmax[i] * 2.0 * twin_P.NonlinearSecondOrderActuator2_j / twin_P.NonlinearSecondOrderActuator_ko;
+    rtb_Gain = twin_P.vmax[i] * 2.0 * twin_P.NonlinearSecondOrderActuator2_j / twin_P.NonlinearSecondOrderActuator_ko;
+    if (rtb_Sum3 > rtb_Gain) {
+        rtb_Sum3 = rtb_Gain;
+    } else {
+        if (rtb_Sum3 < rtb_Sum2) {
+            rtb_Sum3 = rtb_Sum2;
+        }
+    }
+    /* End of Saturate: '<S6>/rate limit*2*zeta//wn' */
+
+    /* Sum: '<S6>/Sum2' incorporates:
+ *  Gain: '<S6>/2*zeta * wn'
+ *  Gain: '<S6>/wn^2'
+ */
+    twin_B.Sum2_g[i] = rtb_Gain_p * rtb_Sum3 - rtb_Sum2_a * rtb_IntegratorSecondOrderLimite[i];
+}
+%<SLibInsertSolverResetCode()>\
+%closefile cfgTxt
+%<cfgTxt>
+%<LibSetSystemField(system, "CachedOutputLocalVars", localVarDecl)>
+%endfunction
+%function OutputsFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Outputs(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 1, fcnProtoType)>
+%endfunction

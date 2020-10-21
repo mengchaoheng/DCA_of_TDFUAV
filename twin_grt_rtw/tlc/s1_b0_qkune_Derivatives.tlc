@@ -1,0 +1,214 @@
+%implements s1_b0_qkune_Derivatives "C"
+
+%function Derivatives(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%openfile localVarDecl
+
+int_T is;
+int_T iS;
+XDot_twin_T *_rtXdot;
+%closefile localVarDecl
+_rtXdot = %<(SLibCG_SE(SLibGetContStatesDerivativeStructPtr()))>;
+/* Derivatives for TransferFcn: '<S13>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE = 0.0;
+_rtXdot->TransferFcn3_CSTATE += -twin_P.TransferFcn3_Denominator[1] / twin_P.TransferFcn3_Denominator[0] * twin_X.TransferFcn3_CSTATE;
+_rtXdot->TransferFcn3_CSTATE += twin_B.Sum3;
+/* Derivatives for TransferFcn: '<S14>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_l = 0.0;
+_rtXdot->TransferFcn3_CSTATE_l += -twin_P.TransferFcn3_Denominator_o[1] / twin_P.TransferFcn3_Denominator_o[0] * twin_X.TransferFcn3_CSTATE_l;
+_rtXdot->TransferFcn3_CSTATE_l += twin_B.Sum3_m;
+/* Derivatives for TransferFcn: '<S15>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_o = 0.0;
+_rtXdot->TransferFcn3_CSTATE_o += -twin_P.TransferFcn3_Denominator_n[1] / twin_P.TransferFcn3_Denominator_n[0] * twin_X.TransferFcn3_CSTATE_o;
+_rtXdot->TransferFcn3_CSTATE_o += twin_B.Sum3_j;
+/* Derivatives for TransferFcn: '<S16>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_i = 0.0;
+_rtXdot->TransferFcn3_CSTATE_i += -twin_P.TransferFcn3_Denominator_f[1] / twin_P.TransferFcn3_Denominator_f[0] * twin_X.TransferFcn3_CSTATE_i;
+_rtXdot->TransferFcn3_CSTATE_i += twin_B.Sum3_h;
+/* Derivatives for TransferFcn: '<S17>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_k = 0.0;
+_rtXdot->TransferFcn3_CSTATE_k += -twin_P.TransferFcn3_Denominator_n3[1] / twin_P.TransferFcn3_Denominator_n3[0] * twin_X.TransferFcn3_CSTATE_k;
+_rtXdot->TransferFcn3_CSTATE_k += twin_B.Sum3_mf;
+/* Derivatives for TransferFcn: '<S18>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_p = 0.0;
+_rtXdot->TransferFcn3_CSTATE_p += -twin_P.TransferFcn3_Denominator_fv[1] / twin_P.TransferFcn3_Denominator_fv[0] * twin_X.TransferFcn3_CSTATE_p;
+_rtXdot->TransferFcn3_CSTATE_p += twin_B.Sum3_jt;
+/* Derivatives for TransferFcn: '<S19>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_a = 0.0;
+_rtXdot->TransferFcn3_CSTATE_a += -twin_P.TransferFcn3_Denominator_e[1] / twin_P.TransferFcn3_Denominator_e[0] * twin_X.TransferFcn3_CSTATE_a;
+_rtXdot->TransferFcn3_CSTATE_a += twin_B.Sum3_i;
+/* Derivatives for TransferFcn: '<S20>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_ol = 0.0;
+_rtXdot->TransferFcn3_CSTATE_ol += -twin_P.TransferFcn3_Denominator_c[1] / twin_P.TransferFcn3_Denominator_c[0] * twin_X.TransferFcn3_CSTATE_ol;
+_rtXdot->TransferFcn3_CSTATE_ol += twin_B.Sum3_hs;
+/* Derivatives for TransferFcn: '<S9>/Transfer Fcn10' */
+_rtXdot->TransferFcn10_CSTATE = 0.0;
+_rtXdot->TransferFcn10_CSTATE += -twin_P.TransferFcn10_Denominator[1] / twin_P.TransferFcn10_Denominator[0] * twin_X.TransferFcn10_CSTATE;
+_rtXdot->TransferFcn10_CSTATE += twin_B.Sum1;
+/* Derivatives for TransferFcn: '<S21>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_c = 0.0;
+_rtXdot->TransferFcn3_CSTATE_c += -twin_P.TransferFcn3_Denominator_k[1] / twin_P.TransferFcn3_Denominator_k[0] * twin_X.TransferFcn3_CSTATE_c;
+_rtXdot->TransferFcn3_CSTATE_c += twin_B.Sum3_k;
+/* Derivatives for TransferFcn: '<S22>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_oe = 0.0;
+_rtXdot->TransferFcn3_CSTATE_oe += -twin_P.TransferFcn3_Denominator_m[1] / twin_P.TransferFcn3_Denominator_m[0] * twin_X.TransferFcn3_CSTATE_oe;
+_rtXdot->TransferFcn3_CSTATE_oe += twin_B.Sum3_d;
+/* Derivatives for TransferFcn: '<S23>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_d = 0.0;
+_rtXdot->TransferFcn3_CSTATE_d += -twin_P.TransferFcn3_Denominator_a[1] / twin_P.TransferFcn3_Denominator_a[0] * twin_X.TransferFcn3_CSTATE_d;
+_rtXdot->TransferFcn3_CSTATE_d += twin_B.Sum3_p;
+/* Derivatives for TransferFcn: '<S24>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_dh = 0.0;
+_rtXdot->TransferFcn3_CSTATE_dh += -twin_P.TransferFcn3_Denominator_j[1] / twin_P.TransferFcn3_Denominator_j[0] * twin_X.TransferFcn3_CSTATE_dh;
+_rtXdot->TransferFcn3_CSTATE_dh += twin_B.Sum3_mv;
+/* Derivatives for TransferFcn: '<S25>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_n = 0.0;
+_rtXdot->TransferFcn3_CSTATE_n += -twin_P.TransferFcn3_Denominator_k3[1] / twin_P.TransferFcn3_Denominator_k3[0] * twin_X.TransferFcn3_CSTATE_n;
+_rtXdot->TransferFcn3_CSTATE_n += twin_B.Sum3_il;
+/* Derivatives for TransferFcn: '<S26>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_c4 = 0.0;
+_rtXdot->TransferFcn3_CSTATE_c4 += -twin_P.TransferFcn3_Denominator_p[1] / twin_P.TransferFcn3_Denominator_p[0] * twin_X.TransferFcn3_CSTATE_c4;
+_rtXdot->TransferFcn3_CSTATE_c4 += twin_B.Sum3_f;
+/* Derivatives for TransferFcn: '<S27>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_aq = 0.0;
+_rtXdot->TransferFcn3_CSTATE_aq += -twin_P.TransferFcn3_Denominator_ja[1] / twin_P.TransferFcn3_Denominator_ja[0] * twin_X.TransferFcn3_CSTATE_aq;
+_rtXdot->TransferFcn3_CSTATE_aq += twin_B.Sum3_a;
+/* Derivatives for TransferFcn: '<S28>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_m = 0.0;
+_rtXdot->TransferFcn3_CSTATE_m += -twin_P.TransferFcn3_Denominator_ji[1] / twin_P.TransferFcn3_Denominator_ji[0] * twin_X.TransferFcn3_CSTATE_m;
+_rtXdot->TransferFcn3_CSTATE_m += twin_B.Sum3_as;
+/* Derivatives for TransferFcn: '<S10>/Transfer Fcn10' */
+_rtXdot->TransferFcn10_CSTATE_l = 0.0;
+_rtXdot->TransferFcn10_CSTATE_l += -twin_P.TransferFcn10_Denominator_h[1] / twin_P.TransferFcn10_Denominator_h[0] * twin_X.TransferFcn10_CSTATE_l;
+_rtXdot->TransferFcn10_CSTATE_l += twin_B.Sum1_e;
+/* Derivatives for TransferFcn: '<S11>/Transfer Fcn10' */
+_rtXdot->TransferFcn10_CSTATE_j = 0.0;
+_rtXdot->TransferFcn10_CSTATE_j += -twin_P.TransferFcn10_Denominator_b[1] / twin_P.TransferFcn10_Denominator_b[0] * twin_X.TransferFcn10_CSTATE_j;
+_rtXdot->TransferFcn10_CSTATE_j += twin_B.Sum1_eo;
+/* Derivatives for TransferFcn: '<S30>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_b = 0.0;
+_rtXdot->TransferFcn3_CSTATE_b += -twin_P.TransferFcn3_Denominator_pe[1] / twin_P.TransferFcn3_Denominator_pe[0] * twin_X.TransferFcn3_CSTATE_b;
+_rtXdot->TransferFcn3_CSTATE_b += twin_B.Sum3_f3;
+/* Derivatives for TransferFcn: '<S31>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_bl = 0.0;
+_rtXdot->TransferFcn3_CSTATE_bl += -twin_P.TransferFcn3_Denominator_b[1] / twin_P.TransferFcn3_Denominator_b[0] * twin_X.TransferFcn3_CSTATE_bl;
+_rtXdot->TransferFcn3_CSTATE_bl += twin_B.Sum3_f0;
+/* Derivatives for TransferFcn: '<S32>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_bj = 0.0;
+_rtXdot->TransferFcn3_CSTATE_bj += -twin_P.TransferFcn3_Denominator_mv[1] / twin_P.TransferFcn3_Denominator_mv[0] * twin_X.TransferFcn3_CSTATE_bj;
+_rtXdot->TransferFcn3_CSTATE_bj += twin_B.Sum3_kf;
+/* Derivatives for TransferFcn: '<S33>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_ka = 0.0;
+_rtXdot->TransferFcn3_CSTATE_ka += -twin_P.TransferFcn3_Denominator_i[1] / twin_P.TransferFcn3_Denominator_i[0] * twin_X.TransferFcn3_CSTATE_ka;
+_rtXdot->TransferFcn3_CSTATE_ka += twin_B.Sum3_e;
+/* Derivatives for TransferFcn: '<S34>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_mc = 0.0;
+_rtXdot->TransferFcn3_CSTATE_mc += -twin_P.TransferFcn3_Denominator_a3[1] / twin_P.TransferFcn3_Denominator_a3[0] * twin_X.TransferFcn3_CSTATE_mc;
+_rtXdot->TransferFcn3_CSTATE_mc += twin_B.Sum3_n;
+/* Derivatives for TransferFcn: '<S35>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_ca = 0.0;
+_rtXdot->TransferFcn3_CSTATE_ca += -twin_P.TransferFcn3_Denominator_h[1] / twin_P.TransferFcn3_Denominator_h[0] * twin_X.TransferFcn3_CSTATE_ca;
+_rtXdot->TransferFcn3_CSTATE_ca += twin_B.Sum3_at;
+/* Derivatives for TransferFcn: '<S36>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_h = 0.0;
+_rtXdot->TransferFcn3_CSTATE_h += -twin_P.TransferFcn3_Denominator_hk[1] / twin_P.TransferFcn3_Denominator_hk[0] * twin_X.TransferFcn3_CSTATE_h;
+_rtXdot->TransferFcn3_CSTATE_h += twin_B.Sum3_b;
+/* Derivatives for TransferFcn: '<S37>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_dv = 0.0;
+_rtXdot->TransferFcn3_CSTATE_dv += -twin_P.TransferFcn3_Denominator_bv[1] / twin_P.TransferFcn3_Denominator_bv[0] * twin_X.TransferFcn3_CSTATE_dv;
+_rtXdot->TransferFcn3_CSTATE_dv += twin_B.Sum3_ag;
+/* Derivatives for SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+switch (twin_DW.IntegratorSecondOrderLimited_MO) {
+  case 0:
+    _rtXdot->IntegratorSecondOrderLimited_CS[0] = twin_X.IntegratorSecondOrderLimited_CS[1];
+    _rtXdot->IntegratorSecondOrderLimited_CS[1] = twin_B.Sum2;
+    break;
+  case 3:
+    _rtXdot->IntegratorSecondOrderLimited_CS[0] = twin_X.IntegratorSecondOrderLimited_CS[1];
+    _rtXdot->IntegratorSecondOrderLimited_CS[1] = 0.0;
+    break;
+  case 4:
+    _rtXdot->IntegratorSecondOrderLimited_CS[0] = twin_X.IntegratorSecondOrderLimited_CS[1];
+    _rtXdot->IntegratorSecondOrderLimited_CS[1] = 0.0;
+    break;
+  case 1:
+    _rtXdot->IntegratorSecondOrderLimited_CS[0] = 0.0;
+    _rtXdot->IntegratorSecondOrderLimited_CS[1] = 0.0;
+    break;
+  case 2:
+    _rtXdot->IntegratorSecondOrderLimited_CS[0] = 0.0;
+    _rtXdot->IntegratorSecondOrderLimited_CS[1] = 0.0;
+    break;
+}
+/* End of Derivatives for SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+
+/* Derivatives for SecondOrderIntegrator: '<S39>/Integrator, Second-Order Limited' */
+switch (twin_DW.IntegratorSecondOrderLimited__f) {
+  case 0:
+    _rtXdot->IntegratorSecondOrderLimited__d[0] = twin_X.IntegratorSecondOrderLimited__d[1];
+    _rtXdot->IntegratorSecondOrderLimited__d[1] = twin_B.Sum2_o;
+    break;
+  case 3:
+    _rtXdot->IntegratorSecondOrderLimited__d[0] = twin_X.IntegratorSecondOrderLimited__d[1];
+    _rtXdot->IntegratorSecondOrderLimited__d[1] = 0.0;
+    break;
+  case 4:
+    _rtXdot->IntegratorSecondOrderLimited__d[0] = twin_X.IntegratorSecondOrderLimited__d[1];
+    _rtXdot->IntegratorSecondOrderLimited__d[1] = 0.0;
+    break;
+  case 1:
+    _rtXdot->IntegratorSecondOrderLimited__d[0] = 0.0;
+    _rtXdot->IntegratorSecondOrderLimited__d[1] = 0.0;
+    break;
+  case 2:
+    _rtXdot->IntegratorSecondOrderLimited__d[0] = 0.0;
+    _rtXdot->IntegratorSecondOrderLimited__d[1] = 0.0;
+    break;
+}
+/* End of Derivatives for SecondOrderIntegrator: '<S39>/Integrator, Second-Order Limited' */
+
+/* Derivatives for TransferFcn: '<S38>/Transfer Fcn3' */
+_rtXdot->TransferFcn3_CSTATE_bw = 0.0;
+_rtXdot->TransferFcn3_CSTATE_bw += -twin_P.TransferFcn3_Denominator_fw[1] / twin_P.TransferFcn3_Denominator_fw[0] * twin_X.TransferFcn3_CSTATE_bw;
+/* Derivatives for SecondOrderIntegrator: '<S6>/Integrator, Second-Order Limited' */
+is = 9;
+for (iS = 0; iS < 9; iS++) {
+    switch (twin_DW.IntegratorSecondOrderLimited__g[iS]) {
+      case 0:
+        _rtXdot->IntegratorSecondOrderLimited__j[iS] = twin_X.IntegratorSecondOrderLimited__j[is];
+        _rtXdot->IntegratorSecondOrderLimited__j[is] = twin_B.Sum2_g[iS];
+        break;
+      case 3:
+        _rtXdot->IntegratorSecondOrderLimited__j[iS] = twin_X.IntegratorSecondOrderLimited__j[is];
+        _rtXdot->IntegratorSecondOrderLimited__j[is] = 0.0;
+        break;
+      case 4:
+        _rtXdot->IntegratorSecondOrderLimited__j[iS] = twin_X.IntegratorSecondOrderLimited__j[is];
+        _rtXdot->IntegratorSecondOrderLimited__j[is] = 0.0;
+        break;
+      case 1:
+        _rtXdot->IntegratorSecondOrderLimited__j[iS] = 0.0;
+        _rtXdot->IntegratorSecondOrderLimited__j[is] = 0.0;
+        break;
+      case 2:
+        _rtXdot->IntegratorSecondOrderLimited__j[iS] = 0.0;
+        _rtXdot->IntegratorSecondOrderLimited__j[is] = 0.0;
+        break;
+    }
+    is++;
+}
+/* End of Derivatives for SecondOrderIntegrator: '<S6>/Integrator, Second-Order Limited' */
+%closefile cfgTxt
+%<cfgTxt>
+%<LibSetSystemField(system, "CachedDerivativeLocalVars", localVarDecl)>
+%endfunction
+%function DerivativesFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Derivatives(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 3, fcnProtoType)>
+%endfunction

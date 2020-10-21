@@ -1,0 +1,135 @@
+%implements s1_b0_qkune_Update "C"
+
+%function Update(block, system) Output
+%<SLibCGIRAccessLocalVar(1, 0, "")> %% rtb_MATLABFcn
+%<SLibCGIRAccessLocalVar(2, 0, "")> %% rtb_MATLABFcn_e
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%openfile localVarDecl
+
+int_T iS;
+boolean_T internalStateChange;
+int32_T uMode;
+%closefile localVarDecl
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Update for UnitDelay: '<S5>/Unit Delay' */
+    memcpy(&twin_DW.UnitDelay_DSTATE[0], &rtb_MATLABFcn[0], 9U * sizeof(real_T));
+    /* Update for UnitDelay: '<S7>/Unit Delay' */
+    memcpy(&twin_DW.UnitDelay_DSTATE_b[0], &rtb_MATLABFcn_e[0], 9U * sizeof(real_T));
+    /* Update for UnitDelay: '<S9>/Unit Delay' */
+    twin_DW.UnitDelay_DSTATE_h = twin_B.inv;
+    /* Update for UnitDelay: '<S13>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE = twin_B.inv1;
+    /* Update for UnitDelay: '<S14>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_j = twin_B.inv1_f;
+    /* Update for UnitDelay: '<S15>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_m = twin_B.inv1_a;
+    /* Update for UnitDelay: '<S16>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_o = twin_B.inv1_j;
+    /* Update for UnitDelay: '<S17>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_e = twin_B.inv1_h;
+    /* Update for UnitDelay: '<S18>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_g = twin_B.inv1_ju;
+    /* Update for UnitDelay: '<S19>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_oy = twin_B.inv1_jk;
+    /* Update for UnitDelay: '<S20>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_d = twin_B.inv1_c;
+    /* Update for UnitDelay: '<S10>/Unit Delay' */
+    twin_DW.UnitDelay_DSTATE_p = twin_B.inv_p;
+    /* Update for UnitDelay: '<S21>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_h = twin_B.inv1_g;
+    /* Update for UnitDelay: '<S22>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_c = twin_B.inv1_e;
+    /* Update for UnitDelay: '<S23>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_l = twin_B.inv1_l;
+    /* Update for UnitDelay: '<S24>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_e5 = twin_B.inv1_fk;
+    /* Update for UnitDelay: '<S25>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_i = twin_B.inv1_k;
+    /* Update for UnitDelay: '<S26>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_n = twin_B.inv1_ld;
+    /* Update for UnitDelay: '<S27>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_ir = twin_B.inv1_hk;
+    /* Update for UnitDelay: '<S28>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_if = twin_B.inv1_p;
+    /* Update for UnitDelay: '<S11>/Unit Delay' */
+    twin_DW.UnitDelay_DSTATE_o = twin_B.inv_i;
+    /* Update for UnitDelay: '<S30>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_cc = twin_B.inv1_m;
+    /* Update for UnitDelay: '<S31>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_a = twin_B.inv1_pv;
+    /* Update for UnitDelay: '<S32>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_jp = twin_B.inv1_o;
+    /* Update for UnitDelay: '<S33>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_f = twin_B.inv1_n;
+    /* Update for UnitDelay: '<S34>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_g3 = twin_B.inv1_m4;
+    /* Update for UnitDelay: '<S35>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_le = twin_B.inv1_nc;
+    /* Update for UnitDelay: '<S36>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_p = twin_B.inv1_n3;
+    /* Update for UnitDelay: '<S37>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_ih = twin_B.inv1_pr;
+}
+/* Update for SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+internalStateChange = false;
+uMode = twin_DW.IntegratorSecondOrderLimited_MO;
+if ((((twin_DW.IntegratorSecondOrderLimited_MO == 1) || (twin_DW.IntegratorSecondOrderLimited_MO == 3)) && (twin_B.Sum2 > 0.0)) || (((twin_DW.IntegratorSecondOrderLimited_MO == 2) || (twin_DW.IntegratorSecondOrderLimited_MO == 4)) && (twin_B.Sum2 < 0.0))) {
+    uMode = 0;
+}
+if (twin_DW.IntegratorSecondOrderLimited_MO != uMode) {
+    twin_DW.IntegratorSecondOrderLimited_MO = uMode;
+    internalStateChange = true;
+}
+if (internalStateChange) {
+    %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+}
+/* End of Update for SecondOrderIntegrator: '<S29>/Integrator, Second-Order Limited' */
+if (%<(SLibCGIRIsSampleHit(1, 1))>) {
+    /* Update for UnitDelay: '<S38>/Unit Delay1' */
+    twin_DW.UnitDelay1_DSTATE_j5 = twin_B.IntegratorSecondOrderLimited_o1;
+}
+/* Update for SecondOrderIntegrator: '<S39>/Integrator, Second-Order Limited' */
+internalStateChange = false;
+uMode = twin_DW.IntegratorSecondOrderLimited__f;
+if ((((twin_DW.IntegratorSecondOrderLimited__f == 1) || (twin_DW.IntegratorSecondOrderLimited__f == 3)) && (twin_B.Sum2_o > 0.0)) || (((twin_DW.IntegratorSecondOrderLimited__f == 2) || (twin_DW.IntegratorSecondOrderLimited__f == 4)) && (twin_B.Sum2_o < 0.0))) {
+    uMode = 0;
+}
+if (twin_DW.IntegratorSecondOrderLimited__f != uMode) {
+    twin_DW.IntegratorSecondOrderLimited__f = uMode;
+    internalStateChange = true;
+}
+if (internalStateChange) {
+    %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+}
+/* End of Update for SecondOrderIntegrator: '<S39>/Integrator, Second-Order Limited' */
+
+/* Update for SecondOrderIntegrator: '<S6>/Integrator, Second-Order Limited' */
+internalStateChange = false;
+for (iS = 0; iS < 9; iS++) {
+    uMode = twin_DW.IntegratorSecondOrderLimited__g[iS];
+    if ((((twin_DW.IntegratorSecondOrderLimited__g[iS] == 1) || (twin_DW.IntegratorSecondOrderLimited__g[iS] == 3)) && (twin_B.Sum2_g[iS] > 0.0)) || (((twin_DW.IntegratorSecondOrderLimited__g[iS] == 2) || (twin_DW.IntegratorSecondOrderLimited__g[iS] == 4)) && (twin_B.Sum2_g[iS] < 0.0))) {
+        uMode = 0;
+    }
+    if (twin_DW.IntegratorSecondOrderLimited__g[iS] != uMode) {
+        twin_DW.IntegratorSecondOrderLimited__g[iS] = uMode;
+        internalStateChange = true;
+    }
+}
+if (internalStateChange) {
+    %<(RTMSetBlockStateForSolverChangedAtMajorStep())>;
+}
+/* End of Update for SecondOrderIntegrator: '<S6>/Integrator, Second-Order Limited' */
+%closefile cfgTxt
+%<cfgTxt>
+%<LibSetSystemField(system, "CachedUpdateLocalVars", localVarDecl)>
+%endfunction
+%function UpdateFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Update(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 2, fcnProtoType)>
+%endfunction
