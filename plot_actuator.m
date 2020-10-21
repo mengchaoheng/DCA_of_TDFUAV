@@ -4,7 +4,7 @@
 % clc;
 clear all;
 close all;
-addpath F:\qcat1_2_1\QCAT\qcat
+addpath qcat1_2_1\QCAT\qcat
 % addpath D:\planD\plan-D\qcat1_2_1\QCAT\qcat
 % function callqpact
 global B plim rlim umin umax vmin vmax a_c a_t com_t_wls com_t_inv com_t_dca dca_W2 com_c p_limits S dca_W1 select_test hf lf Am%Del
